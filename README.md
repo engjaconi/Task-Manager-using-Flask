@@ -1,37 +1,32 @@
 # Task-Manager-using-Flask
 
-A simple web application to store your To-Do Tasks .
+Uma aplicação web simples para armazenar suas tarefas pessoais.
 
-# Features
+# Funcionalidades
 
-- User Authentication
-- Easy to use and deploy locally.
+- Autenticação de usuário.
+- Fácil de usar, com Dockerfile para uso em container.
 
-# Requirements
+# Requesitos
 
-Execute the following command to install the required third party libraries:
+Certifique que possua o docker instalado e sendo executado em seu ambiente.
 
-```pip3 install -r requirements.txt```
+# Execução
 
-# Usage
-
-1. Clone the repository using the following command
+1. Clone o repositório com o comando:
     
-    ```git clone https://github.com/AdityaBagad/Task-Manager-using-Flask.git```
+    ```git clone https://github.com/engjaconi/Task-Manager-using-Flask```
 
-2. Install the dependencies using
+2. Dentro da raiz do projeto execute o camando no terminal para fazer o build do container:
 
-    ```cd  Task-Manager-using-Flask```
-    
-    ```pip3 install -r requirements.txt```
+    ```docker build -t todo .```
 
-3. Run this command to start the application
+3. Executando a aplicação: 
 
-    ```cd todo_project```
+    ```docker run -p 5000:5000 todo```
 
-    ```python run.py```
 
-# Results
+# Resultados
 
 ## Registration Page
 Login or Register if you dont have an account
