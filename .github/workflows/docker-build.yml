@@ -27,8 +27,8 @@ jobs:
 
       - name: Build and tag the Docker image
         run: |
-          docker build -t todo-rnp:latest .
+          docker build -t todo:latest .
 
       - name: Run tests
         run: |
-          docker run --rm todo-rnp:latest ./run-tests.py
+          docker run --rm todo:latest ./run-tests.sh
