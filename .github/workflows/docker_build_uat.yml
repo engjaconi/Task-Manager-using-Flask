@@ -38,6 +38,12 @@ jobs:
         run: |
           docker run --rm ${{ secrets.DOCKER_USERNAME }}/todo:uat ./run-dependency-check.sh
       
+      - name: ZAP Scan
+        uses: zaproxy/action-baseline@v0.12.0
+        with:
+          context: .
+          target: 'https://www.zaproxy.org'
+            
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:

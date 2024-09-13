@@ -36,12 +36,6 @@ COPY . .
 # Executar a análise do pytest
 RUN pytest --disable-warnings --maxfail=1
 
-# Executar a análise do Bandit
-RUN bandit -r . -lll
-
-# Executar a análise do dependency-check
-RUN dependency-check --project "todo" --scan . --format JSON
-
 # Tornar o script de testes executável
 RUN chmod +x ./run-tests.sh
 
