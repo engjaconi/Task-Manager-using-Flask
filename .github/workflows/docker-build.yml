@@ -27,12 +27,12 @@ jobs:
 
       - name: Build and tag the Docker image
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/todo:latest .
+          docker build -t engjaconi/todo:latest .
       
       - name: Push the image to Docker Hub
-        uses: docker/push-action@v3
+        uses: docker/push-action@v6
         with:
-          tags: ${{ secrets.DOCKER_USERNAME }}/todo:latest
+          tags: engjaconi/todo:latest
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
       - name: Run tests
