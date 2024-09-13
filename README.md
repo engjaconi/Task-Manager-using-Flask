@@ -21,7 +21,10 @@ Certifique que possua o docker instalado e sendo executado em seu ambiente.
 
     ```docker build -t todo .```
 
-3. Executando a aplicação: 
+3. Executando testes na aplicação:
+    ```docker run --rm todo ./run-tests.sh```
+
+4. Executando a aplicação: 
 
     ```docker run -p 5000:5000 todo```
 
