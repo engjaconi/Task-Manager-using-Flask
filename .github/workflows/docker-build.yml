@@ -28,15 +28,19 @@ jobs:
       - name: Build and tag the Docker image
         run: |
           docker build -t ${{ secrets.DOCKER_USERNAME }}/todo:latest .
+
+      - name: Run tests
+        run: |
+          docker run todo:latest ./run-tests.sh
       
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: .
-          push: true       
-          tags: ${{ secrets.DOCKER_USERNAME }}/todo:latest
-          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-
-      - name: Run tests
+            context: .
+            push: true       
+            tags: ${{ secrets.DOCKER_USERNAME }}/todo:latest
+            token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+      
+      - name: Remover Imagem Docker
         run: |
-          docker run --rm todo:latest ./run-tests.sh
+          docker rmi todo:latest
