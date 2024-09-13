@@ -30,9 +30,10 @@ jobs:
           docker build -t ${{ secrets.DOCKER_USERNAME }}/todo:latest .
       
       - name: Push the image to Docker Hub
-        uses: docker/push-action@v6
+        uses: docker/push-action@v3
         with:
           tags: ${{ secrets.DOCKER_USERNAME }}/todo:latest
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
       - name: Run tests
         run: |
