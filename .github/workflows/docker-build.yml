@@ -31,4 +31,4 @@ jobs:
 
       - name: Run tests
         run: |
-          docker run --rm todo-rnp:latest ./run-tests.sh
+          docker run --rm todo-rnp:latest ./run-tests.py
