@@ -24,6 +24,9 @@ RUN bandit -r . -lll
 # Tornar o script de testes executável
 RUN chmod +x ./run-tests.sh
 
+# Tornar o script do bandit executável
+RUN chmod +x ./run-bandit.sh
+
 ENV FLASK_APP=todo_project/run.py
 EXPOSE 5000
 CMD ["flask", "run", "--host=0.0.0.0"]
