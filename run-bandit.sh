@@ -7,4 +7,4 @@ set -e
 set -x
 
 # Rodar bandit
-bandit -r .
+bandit -r . -lll
