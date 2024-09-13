@@ -27,7 +27,12 @@ jobs:
 
       - name: Build and tag the Docker image
         run: |
-          docker build -t todo:latest .
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/todo:latest .
+      
+      - name: Push the image to Docker Hub
+        uses: docker/push-action@v6
+        with:
+          tags: ${{ secrets.DOCKER_USERNAME }}/todo:latest
 
       - name: Run tests
         run: |
