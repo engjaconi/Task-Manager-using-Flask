@@ -33,6 +33,10 @@ jobs:
       - name: Run Bandit
         run: |
           docker run --rm ${{ secrets.DOCKER_USERNAME }}/todo:develop ./run-bandit.sh
+      
+      - name: Run dependency-check
+        run: |
+          docker run --rm ${{ secrets.DOCKER_USERNAME }}/todo:develop ./run-dependency-check.sh
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
