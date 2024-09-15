@@ -45,3 +45,40 @@ jobs:
             push: true       
             tags: ${{ secrets.DOCKER_USERNAME }}/todo:develop
             token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+  
+  zap-scan:
+    runs-on: ubuntu-latest
+
+    services:
+      flask-app:
+        image: todo:develop
+        ports:
+          - 5000:5000
+        options: >
+          --health-cmd "curl --fail http://localhost:5000 || exit 1"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Build a imagem Docker da aplicação Flask
+        run: |
+          docker build -t todo:develop .
+
+      - name: Rodar o OWASP ZAP Baseline Scan
+        run: |
+          docker run -u zap -v $(pwd):/zap/wrk:rw --network="host" owasp/zap2docker-stable zap-baseline.py -t http://localhost:5000 -r zap_report.html
+        continue-on-error: true
+
+      - name: Publicar Relatório OWASP ZAP
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: zap-report
+          path: zap_report.html

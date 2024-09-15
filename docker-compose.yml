@@ -1,0 +1,25 @@
+version: '3'
+services:
+  zap:
+    image: ghcr.io/zaproxy/zaproxy 
+    container_name: zap
+    ports:
+      - "8080:8080"
+      - "8090:8090"
+    command: zap-baseline.py -t http://172.20.0.2:5000
+    networks:
+      - zapnet
+
+  web:
+      build: .
+      container_name: todo
+      ports:
+        - "5000:5000"
+      networks:
+        - zapnet
+      environment:
+        FLASK_ENV: development
+
+networks:
+  zapnet:
+    driver: bridge
