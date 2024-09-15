@@ -51,7 +51,7 @@ jobs:
 
     services:
       flask-app:
-        image: todo:develop
+        image: engjaconi/todo:develop
         ports:
           - 5000:5000
         options: >
