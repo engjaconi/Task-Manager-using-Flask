@@ -65,7 +65,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v03
+        uses: docker/setup-buildx-action@v3
 
       - name: Build a imagem Docker da aplicação Flask
         run: |
