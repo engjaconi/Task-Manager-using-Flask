@@ -8,6 +8,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    needs: zap-scan
 
     steps:
       - name: Check out the repository
@@ -48,18 +49,12 @@ jobs:
   
   zap-scan:
     runs-on: ubuntu-latest
-    needs: build
 
     services:
       flask-app:
         image: engjaconi/todo:develop
         ports:
           - 5000:5000
-        options: >
-          --health-cmd 'curl --fail http://localhost:5000 || exit 1'
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5 
 
     steps:
       - name: Checkout código
