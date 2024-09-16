@@ -50,12 +50,6 @@ jobs:
   zap-scan:
     runs-on: ubuntu-latest
 
-    services:
-      flask-app:
-        image: engjaconi/todo:develop
-        ports:
-          - 5000:5000
-
     steps:
       - name: Checkout código
         uses: actions/checkout@v4
@@ -65,23 +59,12 @@ jobs:
 
       - name: Build a imagem Docker da aplicação Flask
         run: |
-          docker build -t todo:develop .
+          docker-compose build
       
       - name: Esperar o Flask estar ativo
         run: sleep 10
 
       - name: Rodar o OWASP ZAP Baseline Scan
         run: |
-          docker run -u zap -v $(pwd):/zap/wrk:rw --network="bridge" owasp/zap2docker-stable zap-baseline.py -t http://localhost:5000 -r zap_report.html
-        continue-on-error: true
-
-      - name: Exibir o Relatório OWASP ZAP no terminal
-        run: |
-          cat zap_report.html
-
-      - name: Publicar Relatório OWASP ZAP
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: zap-report
-          path: zap_report.html
+          docker-compose up
+        continue-on-error: false
