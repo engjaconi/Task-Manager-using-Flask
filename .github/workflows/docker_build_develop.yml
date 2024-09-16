@@ -40,7 +40,7 @@ jobs:
 
       - name: Run app
         run: |
-          docker run --rm ${{ secrets.DOCKER_USERNAME }}/todo:develop
+          docker run ${{ secrets.DOCKER_USERNAME }}/todo:develop
         
       - name: ZAP Scan
         uses: zaproxy/action-baseline@v0.12.0
@@ -59,34 +59,3 @@ jobs:
             push: true       
             tags: ${{ secrets.DOCKER_USERNAME }}/todo:develop
             token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-  
-  zap-scan:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout código
-        uses: actions/checkout@v4
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Instalar Docker Compose
-        run: |
-          sudo apt-get update
-          sudo apt-get install docker-compose -y
-
-      - name: Build a imagem Docker da aplicação Flask
-        run: |
-          docker-compose build
-      
-      - name: Esperar o Flask estar ativo
-        run: sleep 10
-
-      - name: Rodar o OWASP ZAP Baseline Scan
-        run: |
-          docker-compose up
-        continue-on-error: false
-      
-      - name: Parar e remover os containers
-        run: |
-          docker-compose down
