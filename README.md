@@ -27,7 +27,9 @@ Certifique que possua o docker instalado e sendo executado em seu ambiente.
 4. Executando a aplicação: 
 
     ```docker run -p 5000:5000 todo```
-
+5. Executando o OAWSP ZAP:
+    ```docker-compose build```
+    ```docker-compose up```
 
 # Resultados
 
