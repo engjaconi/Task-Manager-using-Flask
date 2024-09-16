@@ -70,11 +70,18 @@ jobs:
       - name: Build a imagem Docker da aplicação Flask
         run: |
           docker build -t todo:develop .
+      
+      - name: Esperar o Flask estar ativo
+        run: sleep 10
 
       - name: Rodar o OWASP ZAP Baseline Scan
         run: |
           docker run -u zap -v $(pwd):/zap/wrk:rw --network="host" owasp/zap2docker-stable zap-baseline.py -t http://localhost:5000 -r zap_report.html
         continue-on-error: true
+
+      - name: Exibir o Relatório OWASP ZAP no terminal
+        run: |
+          cat zap_report.html
 
       - name: Publicar Relatório OWASP ZAP
         if: always()
