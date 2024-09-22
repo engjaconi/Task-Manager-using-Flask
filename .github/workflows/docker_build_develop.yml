@@ -38,10 +38,10 @@ jobs:
       - name: Test with pytest
         run: |
           pip install pytest pytest-cov
-          pytest --html=pytest/test-results.html
+          pytest --cov-report=html --html=test/test-results.html
       
       - name: Export Report
         uses: actions/upload-artifact@v4
         with:
           name: test-results
-          path: /home/runner/work/Task-Manager-using-Flask/Task-Manager-using-Flask/pytest/test-results.html
+          path: /home/runner/work/Task-Manager-using-Flask/Task-Manager-using-Flask/test/test-results.html
