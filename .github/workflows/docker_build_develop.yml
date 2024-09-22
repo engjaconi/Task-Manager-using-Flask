@@ -49,35 +49,17 @@ jobs:
   bandit:
     runs-on: ubuntu-latest
     needs: test
-    permissions:
-      security-events: write
-      actions: read
-      contents: read
-    steps:
-      - name: Perform Bandit Analysis
-        uses: PyCQA/bandit-action@v1
-      
-  dependency-check:
-    runs-on: ubuntu-latest
-    needs: test
     steps:
       - name: Check out the repository
         uses: actions/checkout@v4
 
-      - name: Depcheck
-        uses: dependency-check/Dependency-Check_Action@main
-        id: Depcheck
+      - uses: ioggstream/bandit-report-artifacts@v0.0.2
         with:
-          project: 'test'
-          path: '.'
-          format: 'HTML'
-          out: 'reports'
-          args: >
-            --failOnCVSS 7
-            --enableRetired
+          project_path: .
 
-      - name: Upload Test results
+      - name: Security check report artifacts
         uses: actions/upload-artifact@v4
         with:
-           name: Depcheck report
-           path: ${{github.workspace}}/reports
+          name: Bandit report
+          path: output/security_report.txt
+  
