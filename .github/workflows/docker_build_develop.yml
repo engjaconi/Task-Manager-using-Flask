@@ -36,7 +36,4 @@ jobs:
       - name: Test with pytest
         run: |
           pip install pytest pytest-cov
-      - name: Teste Unitário
-        run: pytest test_unitario.py --doctest-modules --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html
-      - name: Teste Integração
-        run: pytest test_integracao.py --doctest-modules --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html
+          pytest --doctest-modules --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html
