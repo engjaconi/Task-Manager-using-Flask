@@ -45,3 +45,18 @@ jobs:
         with:
           name: test-results
           path: /home/runner/work/Task-Manager-using-Flask/Task-Manager-using-Flask/test/test-results.html
+  
+  bandit:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+        
+      - name: Run Bandit Report
+        uses: libertyy/py3-bandit-check@v2
+      - name: Save Bandit txt Report
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          path: ${{ RUNNER.temp }}/_github_home/bandit_report.out
