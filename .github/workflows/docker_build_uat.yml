@@ -141,5 +141,5 @@ jobs:
         with:
             context: .
             push: true       
-            tags: ${{ secrets.DOCKER_USERNAME }}/uat:latest
+            tags: ${{ secrets.DOCKER_USERNAME }}/todo:uat
             token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
