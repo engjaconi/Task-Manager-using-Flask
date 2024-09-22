@@ -49,21 +49,10 @@ jobs:
   bandit:
     runs-on: ubuntu-latest
     needs: test
+    permissions:
+      security-events: write
+      actions: read
+      contents: read
     steps:
-      - name: Check out the repository
-        uses: actions/checkout@v4
-
-      - name: Run Bandit Report
-        uses: shundor/python-bandit-scan@v1.0
-        with: 
-            path: "."
-            level: high
-            confidence: high
-            exit_zero: true
-            output: "/test/bandit-results.html"
-
-      - name: Export Report
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-results
-          path: /home/runner/work/Task-Manager-using-Flask/Task-Manager-using-Flask/test/bandit-results.html
+      - name: Perform Bandit Analysis
+        uses: PyCQA/bandit-action@v1
