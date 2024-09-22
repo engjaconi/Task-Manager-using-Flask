@@ -44,4 +44,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: test-results.xml
-          path: path/**/[abc]-results?/*
+          path: /home/runner/work/Task-Manager-using-Flask/Task-Manager-using-Flask/junit/test-results.xml
