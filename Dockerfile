@@ -47,4 +47,4 @@ RUN chmod +x ./run-dependency-check.sh
 
 ENV FLASK_APP=todo_project/run.py
 EXPOSE 5000
-CMD ["flask", "run", "--host=172.18.0.3"]
+CMD ["flask", "run", "--host=0.0.0.0"]
