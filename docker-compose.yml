@@ -16,7 +16,7 @@ services:
     ports:
       - "8080:8080"
       - "8090:8090"
-    command: zap-baseline.py -t http://172.18.0.3:5000/
+    command: zap-baseline.py -t http://0.0.0.0:5000/
     networks:
       - zapnet
 
