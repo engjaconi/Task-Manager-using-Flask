@@ -1,4 +1,4 @@
-name: Docker CI
+name: Pipeline Prod
 
 on:
   push:
@@ -119,14 +119,15 @@ jobs:
             tags: ${{ secrets.DOCKER_USERNAME }}/todo:latest
             token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
-  Prometheus-Deploy:
-    needs: [bandit,  dependency-check]
+  metrics:
     runs-on: ubuntu-latest
+    needs: [bandit,  dependency-check]
     steps:
-    - id: deploy
-      name: Deploy
-      uses: bitovi/github-actions-deploy-prometheus@v0.1.1
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        env_ghs: ${{ secrets.DOT_ENV }}
+      - name: Send Deployment Metrics
+        uses: grafana/github-action@v1.2.0
+        with:
+          api_url: ${{ secrets.GRAFANA_API_URL }}
+          api_key: ${{ secrets.GRAFANA_API_KEY }}
+          dashboard_id: <dashboard_id>
+          metrics: '{"status":"success", "deploy_time": "10s"}'
+  
