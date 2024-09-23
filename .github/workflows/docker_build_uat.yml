@@ -1,4 +1,4 @@
-name: Docker CI
+name: Pipeline UAT (STAGE)
 
 on:
   pull_request:
